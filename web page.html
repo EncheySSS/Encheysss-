@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enchey Senior Secondary School, Gangtok</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #333333;
+      max-width: 950px;
+      margin: 24px auto;
+      padding: 24px;
+      background-color: #f0e6d2;
+      /* Main Page Outer Border */
+      border: 3px solid #1a5276;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Clean School Header */
+    .school-header {
+      text-align: center;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #1a5276;
+    }
+    .school-header img {
+      width: 85px;
+      height: 85px;
+      object-fit: contain;
+      margin-bottom: 8px;
+    }
+    .school-header h1 {
+      color: #1a5276;
+      font-size: 1.85rem;
+      letter-spacing: 0.5px;
+    }
+    .school-header p {
+      color: #8b0000;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+
+    /* Navigation Bar */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      background: #e6dac8;
+      padding: 0.75rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      border: 1px solid #c8b9a6;
+    }
+    nav button {
+      color: #1a5276;
+      background: none;
+      border: none;
+      font-weight: bold;
+      font-size: 0.95rem;
+      padding: 8px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav button:hover, nav button.active {
+      color: #ffffff;
+      background-color: #1a5276;
+    }
+
+    /* Page Visibility Controls */
+    .page-content {
+      display: none;
+    }
+    .page-content.active {
+      display: block;
+    }
+
+    /* Card & Container Styles */
+    .card {
+      background-color: #faf6ee;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #1a5276;
+      border-top: 1px solid #c8b9a6;
+      border-right: 1px solid #c8b9a6;
+      border-bottom: 1px solid #c8b9a6;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+    h1.page-title {
+      color: #8b0000;
+      border-bottom: 2px solid #8b0000;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+    h2 {
+      color: #1a5276;
+      margin-top: 24px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #c8b9a6;
+      padding-bottom: 6px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      margin-bottom: 20px;
+      background-color: #faf6ee;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      border: 1px solid #c8b9a6;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    th { background-color: #e6dac8; color: #1a5276; font-weight: bold; }
+    tr:nth-child(even) { background-color: #f0e6d2; }
+
+    /* Media */
+    .img-container { text-align: center; margin: 20px 0; }
+    .img-container img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid #c8b9a6; }
+    
+    /* Photo Comparison Grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .photo-item {
+      background: #fdfbf7;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #c8b9a6;
+      text-align: center;
+    }
+    .photo-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+    .photo-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .badge-before { background-color: #e2e3e5; color: #383d41; }
+    .badge-after { background-color: #d4edda; color: #155724; }
+
+    .btn-more {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #1a5276;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-more:hover { background-color: #8b0000; }
+
+    footer { text-align: center; margin-top: 40px; padding: 20px; color: #555; font-size: 0.9rem; border-top: 1px solid #c8b9a6; }
+  </style>
+</head>
+<body>
+
+  <!-- Clean, Simple School Header -->
+  <div class="school-header">
+    <img src="IMG-20250417-WA0003.jpg" alt="Enchey School Emblem">
+    <h1>Enchey Senior Secondary School</h1>
+    <p>Gangtok, Sikkim &bull; Established 1909 &bull; Affiliated to CBSE</p>
+  </div>
+
+  <!-- Global Navigation Header -->
+  <nav>
+    <button class="nav-btn active" onclick="showPage('home')">Home</button>
+    <button class="nav-btn" onclick="showPage('about')">About Us</button>
+    <button class="nav-btn" onclick="showPage('timeline')">History &amp; Timeline</button>
+    <button class="nav-btn" onclick="showPage('activities')">School Activities</button>
+    <button class="nav-btn" onclick="showPage('infrastructure')">Infrastructure</button>
+    <button class="nav-btn" onclick="showPage('profile')">School Profile</button>
+  </nav>
+
+  <!-- ==================== HOME PAGE ==================== -->
+  <div id="home" class="page-content active">
+
+    <!-- Simple Welcome Card -->
+    <div class="card" style="text-align: center; border-left: 4px solid #8b0000;">
+      <h2 style="margin-top: 0; border: none; color: #8b0000; font-size: 1.5rem;">Welcome to Enchey Senior Secondary School</h2>
+      <p style="font-size: 1.05rem; margin-top: 8px; color: #333;">
+        Holding a unique position in Sikkim's socio-educational history, Enchey evolved from an exclusive monastic institution into an inclusive, modern senior secondary school under the Department of Education, Government of Sikkim.
+      </p>
+      <p style="font-style: italic; color: #1a5276; font-weight: bold; margin-top: 10px;">
+        &ldquo;May we be protected by wisdom, compassion and power of the Buddha&rdquo;
+      </p>
+    </div>
+
+    <!-- Campus Photo -->
+    <div class="img-container">
+      <img src="school.jpg.jpg" alt="Enchey Tempa - Spirit of Enchey" style="max-width: 650px; width: 100%;">
+      <p style="font-style: italic; color: #555; margin-top: 8px;">Enchey Tempa &mdash; The Spirit of Enchey</p>
+    </div>
+
+    <!-- Section 1: Historical Roots -->
+    <h2>Historical Highlights</h2>
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Founding &amp; Monastic Roots (1909)</h3>
+      <p>
+        The school was founded on October 12, 1909, by Chogyal Sidkeong Tulku to provide Buddhist novice monks with both traditional monastic study and modern subjects. Over the decades, it welcomed Tibetan refugee children in 1959 and opened its doors to all communities of Sikkim with formal CBSE affiliation in 1970.
+      </p>
+      <button class="btn-more" onclick="showPage('timeline')">View Full Timeline &amp; Principals &rarr;</button>
+    </div>
+
+    <!-- Section 2: Student Life -->
+    <h2>School Life &amp; Co-Curriculars</h2>
+    <div class="card">
+      <p>
+        Enchey balances modern academic excellence with rich Himalayan culture. Students actively participate in traditional Thangka scroll painting, indigenous archery, folk dance, Bharat Scouts and Guides, eco-initiatives, and competitive sports.
+      </p>
+      <button class="btn-more" onclick="showPage('activities')">Explore School Activities &rarr;</button>
+    </div>
+
+    <!-- Section 3: Campus & Facilities -->
+    <h2>Infrastructure &amp; Campus</h2>
+    <div class="card">
+      <p>
+        Situated on a peaceful ridge overlooking Gangtok and Mount Kanchenjunga, our campus combines traditional Sikkimese architecture with modern facilities, science and computer labs, an all-weather covered assembly ground, and student boarding hostels.
+      </p>
+      <button class="btn-more" onclick="showPage('infrastructure')">View Infrastructure &amp; Developments &rarr;</button>
+    </div>
+
+    <!-- Quick Profile Notice -->
+    <div class="card" style="background-color: #faf3e3; border-left-color: #1a5276;">
+      <p><strong>Quick Information:</strong> CBSE Affiliation No: <strong>1820003</strong> &bull; School Code: <strong>37224</strong> &bull; Classes: <strong>Pre-Primary to Class XII</strong> (Science, Arts, Commerce, IT &amp; Tourism)</p>
+      <button class="btn-more" onclick="showPage('profile')">Full School Profile &rarr;</button>
+    </div>
+
+  </div>
+
+  <!-- ==================== ABOUT PAGE ==================== -->
+  <div id="about" class="page-content">
+    <h1 class="page-title">About Enchey Senior Secondary School</h1>
+    
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Our Legacy &amp; Ethos</h3>
+      <p>Enchey Senior Secondary School holds a landmark position in Sikkim's educational journey. Established in 1909, it originated as a unique experiment in monastic education initiated by the visionary ruler Chogyal Sidkeong Tulku. Over the decades, it transformed into a premier public co-educational boarding school under the Directorate of Education, Government of Sikkim.</p>
+      <p style="margin-top: 12px;">Nestled on a serene hilltop ridge overlooking the city of Gangtok and the majestic Kanchenjunga peak, the institution provides an inspiring environment where academic rigor meets rich Himalayan cultural heritage.</p>
+    </div>
+
+    <div class="img-container">
+      <img src="legacy.jpeg" alt="Enchey Emblem" style="max-width: 250px;">
+      <p style="font-style: italic; color: #555; margin-top: 6px;">LEGACY: The History Of Enchey School (ESTD - 1909 A.D.)</p>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Academic Environment &amp; Pedagogy</h3>
+      <p>The school is committed to nurturing holistic learning by combining standard national curricula with localized, context-rich knowledge systems. With state-funded modern infrastructure, qualified faculty, and dedicated residential facilities, Enchey Senior Secondary School serves as an educational beacon for students hailing from both urban Gangtok and remote mountain districts.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Vision &amp; Mission</h3>
+      <ul>
+        <li><strong>Academic Excellence:</strong> Delivering strong foundational knowledge in STEM, Commerce, and Humanities under the CBSE framework to empower students for national competitive standards.</li>
+        <li><strong>Cultural Roots &amp; Identity:</strong> Preserving the unique multi-ethnic heritage, languages, and values of the Eastern Himalayas.</li>
+        <li><strong>Inclusive Education:</strong> Providing equal educational access, subsidized boarding facilities, and support for rural students across Sikkim's remote districts.</li>
+        <li><strong>Mindfulness &amp; Character Building:</strong> Fostering compassion, intellectual integrity, and community service inspired by the school's historical monastic foundations.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Key Milestones at a Glance</h3>
+      <ul>
+        <li><strong>1909:</strong> Founded as a monastic school for 5 initial novice monks.</li>
+        <li><strong>1959:</strong> Opened doors to shelter and educate Tibetan refugee children following regional political changes.</li>
+        <li><strong>1970:</strong> Granted official CBSE affiliation and opened admissions to all local communities across Sikkim.</li>
+        <li><strong>2009:</strong> Celebrated 100 years of historic service to Himalayan education.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Administrative Contact</h3>
+      <p><strong>Institution:</strong> Enchey Senior Secondary School</p>
+      <p><strong>Location:</strong> Gangtok, Sikkim, India (PIN: 737103)</p>
+      <p style="margin-top: 6px;"><strong>Principal Name:</strong> KARMA SONAM BHUTIA </p>
+      <p style="margin-top: 6px;"><strong>Principal Contact No:</strong> Phone : 9932788257</p>
+      <p style="margin-top: 6px;"><strong>Email:</strong> encheyschool@gmail.com </p>
+    </div>
+  </div>
+
+  <!-- ==================== TIMELINE PAGE ==================== -->
+  <div id="timeline" class="page-content">
+    <h1 class="page-title">Historical Timeline &amp; Leadership</h1>
+    
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">1. Founding &amp; Monastic Roots (1909)</h3>
+      <ul>
+        <li><strong>Visionary Royal Founder:</strong> On October 12, 1909, Chogyal (King) Sidkeong Tulku laid the foundation for the school.</li>
+        <li><strong>Purpose:</strong> Created specifically for young Buddhist monks to combine traditional monastic studies with modern subjects like basic arithmetic, grammar, poetry, medicine, and astrology.</li>
+        <li><strong>Early Setup:</strong> Operating out of the Enchey Monastery compound with surrounding huts as dormitories, it initially enrolled 5 monks—including Kazi Lhendup Dorjee Khangsarpa, Sikkim's future first Chief Minister.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">2. Expansion to Tibetan Refugees (1959)</h3>
+      <ul>
+        <li><strong>Tibetan Influx:</strong> Following political developments in Tibet in 1959, the school broadened its mandate by enrolling Tibetan refugee children alongside monastic students.</li>
+        <li><strong>New Campus (1966):</strong> To accommodate the growing student body, the Tibetan Government-in-Exile constructed a dedicated building in 1966, forming the basis of the modern campus site.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">3. Integration &amp; Formal Recognition (1969–1970s)</h3>
+      <ul>
+        <li><strong>New Leadership &amp; CBSE Affiliation:</strong> Under Principal Madhusudhan Singh in 1969, the curriculum was modernized, earning official recognition from the Central Board of Secondary Education (CBSE) in 1970.</li>
+        <li><strong>Opening to All Communities (1970):</strong> Admissions opened to children of all backgrounds, ethnic groups, and communities across Sikkim, morphing into a multicultural co-educational boarding school. Its first 12th-grade CBSE batch graduated in 1973.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">4. Shift to Modern Mainstream Schooling (1980s–Present)</h3>
+      <ul>
+        <li><strong>Curriculum Expansion:</strong> Nepali was introduced into the curriculum during 1984–85 to align with state requirements.</li>
+        <li><strong>Modern Era:</strong> By the early 1990s, monastic enrollments gradually wound down, shifting the school fully into mainstream public education.</li>
+        <li><strong>Cultural Identity:</strong> The school honors its heritage through cultural education, traditional attire (such as the <em>Bakhu</em>), and regional language studies.</li>
+      </ul>
+    </div>
+
+    <!-- Monastic Leadership Table -->
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Chronological List of Head Lamas</h3>
+      <p style="margin-bottom: 12px; color: #555;">The spiritual and academic stewards who led Enchey during its monastic era:</p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 15%;">Sl. No.</th>
+            <th>Name of Head Lama</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Ven. Choeje Rinzing</strong> (The First Head Lama)</td></tr>
+          <tr><td>2</td><td>Ven. Tengay Lama</td></tr>
+          <tr><td>3</td><td>Ven. Thomtuk Lama</td></tr>
+          <tr><td>4</td><td>Ven. Loben Rinzing Lama</td></tr>
+          <tr><td>5</td><td>Ven. Rinzing Lama</td></tr>
+          <tr><td>6</td><td>Ven. Amzi Palden Gyamtso</td></tr>
+          <tr><td>7</td><td>Ven. Shapto Thubten Tenzing</td></tr>
+          <tr><td>8</td><td>Ven. Basi Phuntsok Wangyal</td></tr>
+          <tr><td>9</td><td>Ven. Ugen Gyatso Lama</td></tr>
+          <tr><td>10</td><td>Mr. Kunga Wangdi</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Principals Chronology Table -->
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Chronological List of Principals</h3>
+      <p style="margin-bottom: 12px; color: #555;">Leadership of the school following modernization and formal CBSE affiliation:</p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 10%;">Sl. No.</th>
+            <th>Name of Principal</th>
+            <th>From</th>
+            <th>To</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Mr. M.S. Singh</strong></td><td>08.05.1969</td><td>20.10.1975</td></tr>
+          <tr><td>2</td><td><strong>Mr. C.N. Sharma</strong></td><td>21.10.1975</td><td>21.09.1977</td></tr>
+          <tr><td>3</td><td><strong>Mr. R.K. Panday</strong> <span style="font-size: 0.85em; color: #666;">(Officiating Principal)</span></td><td>29.05.1978</td><td>24.10.1978</td></tr>
+          <tr><td>4</td><td><strong>Mr. G.K. Bakshi</strong></td><td>22.09.1977</td><td>25.04.1983</td></tr>
+          <tr><td>5</td><td><strong>Mr. Dinesh Sharma</strong></td><td>26.04.1983</td><td>23.05.1988</td></tr>
+          <tr><td>6</td><td><strong>Mr. S.K. Foning</strong></td><td>23.05.1988</td><td>11.08.1991</td></tr>
+          <tr><td>7</td><td><strong>Mr. K.M. Mathew</strong></td><td>12.08.1991</td><td>01.10.1993</td></tr>
+          <tr><td>8</td><td><strong>Mr. S.K. Bhaumik</strong></td><td>01.10.1993</td><td>16.03.1998</td></tr>
+          <tr><td>9</td><td><strong>Mrs. M. Basnett</strong></td><td>17.03.1998</td><td>30.08.2002</td></tr>
+          <tr><td>10</td><td><strong>Mr. G.T. Bhutia</strong></td><td>09.09.2002</td><td>08.04.2009</td></tr>
+          <tr><td>11</td><td><strong>Mr. S. Denzongpa</strong></td><td>08.04.2009</td><td>10.04.2013</td></tr>
+          <tr><td>12</td><td><strong>Mrs. T. Chingapa</strong></td><td>03.09.2013</td><td>25.01.2017</td></tr>
+          <tr><td>13</td><td><strong>Mrs. Lamkila Bhutia</strong></td><td>25.01.2017</td><td>&mdash;</td></tr>
+          <tr><td>14</td><td><strong>Mr. Karma Sonam Bhutia</strong></td><td>&mdash;</td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ==================== SCHOOL ACTIVITIES PAGE ==================== -->
+  <div id="activities" class="page-content">
+    <h1 class="page-title">School Activities &amp; Student Life</h1>
+    
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Cultural &amp; Traditional Arts</h3>
+      <ul>
+        <li><strong>Thangka Painting Workshops:</strong> Hands-on training under traditional artists teaching classical Buddhist scroll painting, symmetry, and natural pigment art.</li>
+        <li><strong>Folk Music &amp; Dance Groups:</strong> Student troupes training in traditional Sikkimese, Bhutia, Lepcha, and Nepali folk performance arts for state celebrations.</li>
+        <li><strong>Festivals &amp; Ritual Performances:</strong> School participation in Pang Lhabsol, Losar, Saga Dawa, and Bhanu Jayanti events.</li>
+        <li><strong>Traditional Attire Days:</strong> Regular practice of wearing the traditional Sikkimese dress (<em>Bakhu</em> or <em>Kho</em>) to build pride in regional identity.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Sports &amp; Outdoor Adventure</h3>
+      <ul>
+        <li><strong>Traditional Archery:</strong> Practice sessions and competitions keeping traditional Himalayan wooden-bow archery alive among youth.</li>
+        <li><strong>Inter-House Athletic Championships:</strong> Annual multi-day sports meets covering football, basketball, volleyball, table tennis, and track &amp; field.</li>
+        <li><strong>Trekking &amp; Nature Trails:</strong> Guided mountain treks and outdoor survival excursions across local ridge tracks around Gangtok.</li>
+        <li><strong>Martial Arts &amp; Self-Defense:</strong> Taekwondo and basic martial arts training offered for physical fitness and confidence building.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Academic Clubs &amp; Literary Societies</h3>
+      <ul>
+        <li><strong>Himalayan Language Societies:</strong> Active reading and literary circles in Bhutia, Lepcha, Limbu, and Nepali to preserve regional scripts and dialects.</li>
+        <li><strong>Science &amp; Innovation Club:</strong> Annual exhibits featuring student projects in renewable energy, robotics, and regional ecological solutions.</li>
+        <li><strong>Debate &amp; Public Speaking:</strong> Inter-school debate programs and extempore competitions in English and regional languages.</li>
+        <li><strong>School Periodical &amp; Wall Magazine:</strong> Student-edited newsletters featuring original creative writing, poems, and regional artwork.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Youth Leadership &amp; Community Service</h3>
+      <ul>
+        <li><strong>Bharat Scouts &amp; Guides:</strong> Training in leadership, first aid, knot-tying, camping, and disaster response drills.</li>
+        <li><strong>Eco-Club (Green Enchey Initiative):</strong> Plastic-free campus drives, tree-plantation initiatives, and composting projects.</li>
+        <li><strong>Community Outreach:</strong> Student-led social service visits to local health centers, community elder care, and clean-up campaigns across Gangtok town.</li>
+      </ul>
+    </div>
+
+    <!-- Official Facebook Group Link -->
+    <div class="card" style="text-align: center; background-color: #eaf2f8;">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Connect With Us On Social Media</h3>
+      <p style="margin-bottom: 12px;">Stay updated with our latest activities, photos, and announcements on our official Facebook group.</p>
+      <a href="https://www.facebook.com/share/g/1D8ekGS2RZ/" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #1877f2; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+        Visit Enchey SSS Facebook Group &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- ==================== INFRASTRUCTURE PAGE ==================== -->
+  <div id="infrastructure" class="page-content">
+    <h1 class="page-title">Infrastructure &amp; Architectural Heritage</h1>
+    
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Campus &amp; Architectural Heritage</h3>
+      <ul>
+        <li><strong>The Sacred Site:</strong> Stands on land blessed by the 19th-century tantric master Lama Drupthob Karpo, who built a small hermitage here after reportedly flying from Maenam Hill in South Sikkim. This site later expanded into Enchey Monastery.</li>
+        <li><strong>100th Anniversary Celebrations (2009):</strong> Celebrated its centenary in October 2009, marking its journey from a 5-monk class in a monastery hut to a major educational institution.</li>
+        <li><strong>Architecture &amp; Setting:</strong> Situated on a ridge above Gangtok overlooking Mount Kanchenjunga, the campus incorporates traditional Sikkimese architectural motifs, including intricate woodwork, colorful window frames (<em>Tashitakgye</em>), and a traditional entrance gate (<em>Ghyo</em>).</li>
+        <li><strong>Campus Facilities:</strong> Equipped with state-funded physics, chemistry, biology, and IT laboratories, residential hostels for rural students, and a library containing rare manuscripts and regional historical records.</li>
+      </ul>
+    </div>
+
+    <!-- Infrastructural Development Record -->
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Recent Infrastructural Development In The School</h3>
+      <p style="margin-bottom: 14px;">
+        The school has witnessed some major development projects which were initiated under the guidance of <strong>Mrs Lamkila Bhutia, Principal, Enchey</strong>. These projects were completed by the school along with the contributions from the staff of Enchey, the Alumni Association, S.M.C members, and parents of enrolled students.
+      </p>
+      
+      <p style="font-weight: bold; color: #1a5276; margin-bottom: 8px;">Projects achieved by the school in recent years:</p>
+      <ul>
+        <li>Assembly Ground, primary section (concrete flooring).</li>
+        <li>Footpath connecting the primary section with the senior section.</li>
+        <li>Footpath to the teacher's toilet.</li>
+        <li>Classroom flooring in ten classes.</li>
+        <li>Renovation of the entrance (senior section).</li>
+        <li>Installation of CCTV cameras.</li>
+        <li>Backside fencing.</li>
+        <li>Water connection.</li>
+        <li>Hand washing unit (sponsored by Mr. Karma Tempo Ethenpa, P.G.T. English, Enchey S.S.S).</li>
+        <li>The construction of the truss over the school's assembly ground.</li>
+        <li>The construction of the concrete assembly stage on the school assembly ground.</li>
+        <li>The setting up of iron benches and the fencing around the assembly ground.</li>
+      </ul>
+    </div>
+
+    <!-- Visual Showcase 1: Building Renovation Comparison -->
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 6px;">School Building Facade Transformation</h3>
+      <p style="color: #555; font-size: 0.95rem; margin-bottom: 12px;">Visual record of the multi-storey academic block before and after extensive restoration, structural strengthening, and repainting.</p>
+      
+      <div class="photo-grid">
+        <div class="photo-item">
+          <span class="photo-badge badge-before">Prior State</span>
+          <img src="0ae0a192-7a25-4159-9a5d-9ca730cbc55e.jpg" alt="Enchey School Building Prior State">
+          <p style="font-size: 0.85rem; color: #666; margin-top: 8px; font-weight: 500;">Original building structure prior to extensive exterior modernization</p>
+        </div>
+        <div class="photo-item">
+          <span class="photo-badge badge-after">Post Renovation</span>
+          <img src="9619ff81-b327-43d5-a4a7-5f721f753dc2.jpg" alt="Enchey School Building Post Renovation">
+          <p style="font-size: 0.85rem; color: #666; margin-top: 8px; font-weight: 500;">Upgraded multi-tier academic block with Sikkimese traditional woodwork accents and leveled courtyard</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual Showcase 2: Covered Truss & Assembly Stage -->
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Modern Assembly Ground, Truss &amp; Concrete Stage</h3>
+      <p style="color: #555; font-size: 0.95rem; margin-bottom: 12px;">
+        A practical demonstration of the recent projects: the all-weather roof truss sheltering the assembly ground and the concrete elevated stage hosting student cultural events, inter-house debates, and daily prayer meets.
+      </p>
+      
+      <div class="img-container" style="margin: 10px 0;">
+        <img src="c90ecbf6-1ff1-4409-b761-fd8927d08304.jpg" alt="All-Weather Truss and Concrete Assembly Stage in Action" style="max-width: 100%; max-height: 480px; object-fit: contain;">
+        <p style="font-style: italic; color: #555; margin-top: 8px; font-size: 0.9rem;">
+          The all-weather truss shelter and concrete assembly stage actively utilized during student house activities
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PROFILE PAGE ==================== -->
+  <div id="profile" class="page-content">
+    <h1 class="page-title">School Profile Overview</h1>
+
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Institutional Motto &amp; Values</h3>
+      <p style="font-style: italic; font-weight: bold; color: #8b0000; margin-bottom: 8px;">
+        &ldquo;May we be protected by wisdom, compassion and power of the Buddha&rdquo;
+      </p>
+      <p><strong>The "ENCHEY" Spirit stands for nurturing:</strong></p>
+      <ul style="margin-top: 6px;">
+        <li><strong>E</strong> &ndash; Empowered</li>
+        <li><strong>N</strong> &ndash; Naturalist</li>
+        <li><strong>C</strong> &ndash; Compassionate</li>
+        <li><strong>H</strong> &ndash; Honest</li>
+        <li><strong>E</strong> &ndash; Empathetic</li>
+        <li><strong>Y</strong> &ndash; Youth for a better tomorrow</li>
+      </ul>
+    </div>
+
+    <!-- Official Registry Details Table -->
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Official Identifiers &amp; Registration</h3>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 35%;">Registry Key</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>CBSE Affiliation Number</strong></td>
+            <td>1820003</td>
+          </tr>
+          <tr>
+            <td><strong>CBSE School Code</strong></td>
+            <td>37224</td>
+          </tr>
+          <tr>
+            <td><strong>UDISE+ Code</strong></td>
+            <td>11040303901</td>
+          </tr>
+          <tr>
+            <td><strong>Establishment Year</strong></td>
+            <td>1909 (Monastic foundation by Chogyal Sidkeong Tulku)</td>
+          </tr>
+          <tr>
+            <td><strong>School Status / Level</strong></td>
+            <td>Senior Secondary (Pre-Primary / Class I to Class XII)</td>
+          </tr>
+          <tr>
+            <td><strong>Managing Authority</strong></td>
+            <td>Department of Education, Government of Sikkim</td>
+          </tr>
+          <tr>
+            <td><strong>School Type / Gender</strong></td>
+            <td>Co-educational (Day-Scholar and Residential Boarding)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Academic & Location Profile Table -->
+    <div class="card">
+      <h3 style="color: #1a5276; margin-bottom: 8px;">Academic &amp; Geographic Information</h3>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 35%;">Category</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Affiliating Board</strong></td>
+            <td>Central Board of Secondary Education (CBSE), New Delhi</td>
+          </tr>
+          <tr>
+            <td><strong>Medium of Instruction</strong></td>
+            <td>English</td>
+          </tr>
+          <tr>
+            <td><strong>Languages Taught</strong></td>
+            <td>English, Hindi, Nepali, Bhutia, Lepcha, Limbu, and Tibetan</td>
+          </tr>
+          <tr>
+            <td><strong>Higher Secondary Streams</strong></td>
+            <td>Science, Commerce, Humanities / Arts, Travel &amp; Tourism Management (TTM), and Information Technology (IT)</td>
+          </tr>
+          <tr>
+            <td><strong>Academic Session</strong></td>
+            <td>February / March to December</td>
+          </tr>
+          <tr>
+            <td><strong>Campus Location</strong></td>
+            <td>2ndMile , Gangtok</td>
+          </tr>
+          <tr>
+            <td><strong>District &amp; State</strong></td>
+            <td>Gangtok District (East Sikkim), Sikkim, India</td>
+          </tr>
+          <tr>
+            <td><strong>Postal PIN Code</strong></td>
+            <td>737103</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Enchey Senior Secondary School, Gangtok, Sikkim. All rights reserved.</p>
+  </footer>
+
+  <!-- Script to toggle views -->
+  <script>
+    function showPage(pageId) {
+      // Hide all content blocks
+      const pages = document.querySelectorAll('.page-content');
+      pages.forEach(page => page.classList.remove('active'));
+
+      // Remove active state from all nav buttons
+      const buttons = document.querySelectorAll('.nav-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      // Show selected page
+      const selectedPage = document.getElementById(pageId);
+      if (selectedPage) {
+        selectedPage.classList.add('active');
+      }
+
+      // Sync active state on navigation buttons
+      buttons.forEach(btn => {
+        if (btn.getAttribute('onclick').includes(pageId)) {
+          btn.classList.add('active');
+        }
+      });
+
+      // Scroll smoothly to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
